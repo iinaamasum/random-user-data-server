@@ -81,3 +81,23 @@ module.exports.updateUserById = (req, res, next) => {
     data: updatedUserData,
   });
 };
+
+module.exports.deleteUserById = (req, res, next) => {
+  const id = req.params.id;
+  const users = data;
+  const findUser = users.find((user) => user.id === Number(id));
+  if (!findUser) {
+    res.status(404).send({
+      status: 'failed',
+      message: 'given id is not found in the database',
+    });
+  }
+
+  const newUsers = users.filter((user) => user.id !== Number(id));
+  appendDataToJsonFile(JSON.stringify(newUsers));
+  res.status(200).send({
+    status: 'success',
+    message: 'following user is deleted from the database --> object',
+    data: findUser,
+  });
+};
