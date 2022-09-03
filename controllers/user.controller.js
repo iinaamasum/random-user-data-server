@@ -101,3 +101,32 @@ module.exports.deleteUserById = (req, res, next) => {
     data: findUser,
   });
 };
+
+module.exports.bulkUpdateUser = (req, res, next) => {
+  const multipleUserData = req.body;
+  console.log(multipleUserData);
+  const users = data;
+  let flag = false;
+  for (let i = 0; i < users.length; i++) {
+    for (let j = 0; j < multipleUserData.length; j++) {
+      if (users[i].id === multipleUserData[j].id) {
+        users[i] = { ...users[i], ...multipleUserData[j] };
+        flag = true;
+      }
+    }
+  }
+
+  if (!flag)
+    res.status(404).send({
+      status: 'failed',
+      message: 'user not found in the database by those id',
+    });
+
+  appendDataToJsonFile(JSON.stringify(users));
+
+  res.status(200).send({
+    status: 'success',
+    message: 'users are updated with the following information --> array',
+    data: multipleUserData,
+  });
+};
