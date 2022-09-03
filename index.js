@@ -2,14 +2,14 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const data = require('./userData/userDataParse');
-const randomUser = require('./routes/user.route.js');
+const userRouter = require('./routes/user.route.js');
 const port = 4000;
 
 app.use(cors());
 app.use(express.json());
 
 // routes
-app.use('/user', randomUser);
+app.use('/user', userRouter);
 
 app.all('/', (req, res) => {
   res.status(200).send('Server is running');
