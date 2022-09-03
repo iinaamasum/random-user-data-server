@@ -10,38 +10,38 @@ The project is all about to implement CRUD operations to find, update a Random U
 
 #### GET all user or limit of user
 
-```http
+```bash
   GET /user/all
   GET /user/all?limit=[Number 1 - 100]
 ```
 
 #### GET a random user
 
-```http
+```bash
   GET /api/random
 ```
 
 #### POST a user
 
-```http
+```bash
   POST /user/save
 ```
 
 #### PATCH a user by id
 
-```http
+```bash
   PATCH /user/update/:id
 ```
 
 #### PATCH multiple user with array from req.body
 
-```http
+```bash
   PATCH /user/bulk-update
 ```
 
 #### DELETE a user by id
 
-```http
+```bash
   DELETE /user/ delete/:id
 ```
 
