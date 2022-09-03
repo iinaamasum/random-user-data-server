@@ -18,7 +18,7 @@ The project is all about to implement CRUD operations to find, update a Random U
 #### GET a random user
 
 ```bash
-  GET /api/random
+  GET /user/random
 ```
 
 #### POST a user
@@ -42,7 +42,7 @@ The project is all about to implement CRUD operations to find, update a Random U
 #### DELETE a user by id
 
 ```bash
-  DELETE /user/ delete/:id
+  DELETE /user/delete/:id
 ```
 
 ## Authors
