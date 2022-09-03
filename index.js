@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const data = require('./userData/userDataParse');
-const randomUser = require('./routes/aRandomUser.route.js');
+const randomUser = require('./routes/user.route.js');
 const port = 4000;
 
 app.use(cors());
