@@ -49,7 +49,35 @@ module.exports.saveRandomUser = (req, res, next) => {
 
   res.status(200).send({
     status: 'success',
-    message: 'added a random user --> object',
+    message: 'added following user --> object',
     data: newUser,
+  });
+};
+
+module.exports.updateUserById = (req, res, next) => {
+  const id = req.params.id;
+  let users = data;
+  const newData = req.body;
+
+  const findUser = users.find((user) => user.id === Number(id));
+  if (!findUser) {
+    res.status(404).send({
+      status: 'failed',
+      message: 'given id is not found in the database',
+    });
+  }
+  const updatedUserData = { ...findUser, ...newData };
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].id === Number(id)) {
+      users[i] = updatedUserData;
+    }
+  }
+  appendDataToJsonFile(JSON.stringify(users));
+
+  res.status(200).send({
+    status: 'success',
+    message:
+      'updated successfully of the following user with new data --> object',
+    data: updatedUserData,
   });
 };

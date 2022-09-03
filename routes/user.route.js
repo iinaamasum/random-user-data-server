@@ -3,6 +3,7 @@ const {
   getRandomUser,
   getAllUser,
   saveRandomUser,
+  updateUserById,
 } = require('../controllers/user.controller');
 const router = express.Router();
 
@@ -61,5 +62,7 @@ router
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
    */
   .post(saveRandomUser);
+
+router.route('/update/:id').patch(updateUserById);
 
 module.exports = router;
