@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const data = require('./userData/userDataParse');
 const port = 4000;
 
-const userData = require('./userData/userData.json');
-console.log(JSON.stringify(userData));
+app.use(cors());
+app.use(express.json());
 
 app.all('/', (req, res) => {
   res.status(200).send('Server is running');
