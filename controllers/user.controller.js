@@ -1,5 +1,7 @@
 const data = require('../userData/userDataParse');
 const randomUserInList = require('../utils/randomUserInRange');
+const path = require('path');
+const appendDataToJsonFile = require('../utils/appendDataToJsonFile');
 
 module.exports.getRandomUser = (req, res, next) => {
   const users = data;
@@ -27,9 +29,27 @@ module.exports.getAllUser = (req, res, next) => {
       users = data.slice(lowerLimit, Number(limit) + lowerLimit);
     }
   } else users = data;
+
   res.status(200).send({
     status: 'success',
     message: 'all user data --> array',
     data: users,
+  });
+};
+
+module.exports.saveRandomUser = (req, res, next) => {
+  const reqData = req.body;
+  const users = data;
+  const newUser = {
+    id: users.length + 1,
+    ...reqData,
+  };
+  users.push(newUser);
+  appendDataToJsonFile(JSON.stringify(users));
+
+  res.status(200).send({
+    status: 'success',
+    message: 'added a random user --> object',
+    data: newUser,
   });
 };

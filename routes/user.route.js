@@ -1,5 +1,9 @@
 const express = require('express');
-const { getRandomUser, getAllUser } = require('../controllers/user.controller');
+const {
+  getRandomUser,
+  getAllUser,
+  saveRandomUser,
+} = require('../controllers/user.controller');
 const router = express.Router();
 
 router
@@ -30,14 +34,32 @@ router
    *
    * @apiHeader {String} Authorization   User's access token
    *
-   * @apiParam  {Number{1-}}         [page=1]     List page
-   * @apiParam  {Number{1-100}}      [limit=10]  Users per page
+   * @apiParam  limit = {Number{1-100}}  any number between 1 to 100 to get limited random user
    *
    * @apiSuccess {Object[]} all the user.
    *
    * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
+   * @apiError (Forbidden 406)     Unacceptable  limit is not in the range of [1-100]
    */
   .get(getAllUser);
+
+router
+  .route('/save')
+  /**
+   * @api {Method: POST}
+   * @api_local_link: http://localhost:4000/user/save
+   *
+   * @apiDescription POST a random user
+   * @apiPermission admin, user
+   *
+   * @apiHeader {String} Authorization   User's access token
+   *
+   * @apiSuccess {Object[]} the updated user data
+   *
+   * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
+   * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
+   */
+  .post(saveRandomUser);
 
 module.exports = router;
